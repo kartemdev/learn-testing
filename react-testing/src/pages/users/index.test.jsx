@@ -2,8 +2,7 @@ import { render, screen } from '@testing-library/react';
 import Users from './index';
 import axios from 'axios';
 import userEvent from '@testing-library/user-event';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
-import UserDetailsPage from '../pages/user-details-page';
+import renderWithRouter from '../../tests/helpers/render-with-router';
 
 jest.mock('axios');
 
@@ -49,14 +48,7 @@ describe('USERS TEST', () => {
   });
 
   test('Redirect to details user', async () => {
-    render(
-      <MemoryRouter initialEntries={['/users']}>
-        <Routes>
-          <Route path="/users" element={<Users />} />
-          <Route path="/users/:id" element={<UserDetailsPage />} />
-        </Routes>
-      </MemoryRouter>
-    );
+    renderWithRouter('/users');
     const users = await screen.findAllByTestId('user-item');
     expect(users.length).toBe(4)
     await userEvent.click(users[0])

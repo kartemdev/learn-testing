@@ -20,7 +20,7 @@ const Users = () => {
   }, []);
 
   return (
-    <div>
+    <div data-testid='users-page'>
       {users.map((user) => (
         <Link
           key={user.id}
