@@ -1,18 +1,14 @@
-import { render, screen } from "@testing-library/react";
-import Counter from ".";
 import userEvent from "@testing-library/user-event";
-import { createReduxStore } from "../../store/store";
-import { Provider } from "react-redux";
+import { renderTestApp } from "../../tests/helpers/render-test-app";
 
 describe('Counter test', () => {
   test('test', async () => {
-    const { getByTestId } = render(
-      <Provider store={createReduxStore({
+    const { getByTestId } =  renderTestApp(null, {
+      route: '/',
+      store: {
         counter: { value: 10 }
-      })}>
-        <Counter />
-      </Provider>
-    );
+      }
+    });
     const incrementBtn = getByTestId('increment-btn');
 
     expect(getByTestId('value-title')).toHaveTextContent('value: 10');

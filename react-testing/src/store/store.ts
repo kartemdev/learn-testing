@@ -9,3 +9,5 @@ export const createReduxStore = (initialState: Record<string, unknown> = {}) => 
   reducer: rootReducer,
   preloadedState: initialState,
 });
+
+export const store = createReduxStore();

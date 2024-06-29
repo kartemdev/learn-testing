@@ -3,10 +3,11 @@ import userEvent from "@testing-library/user-event";
 
 import renderWithRouter from "../../tests/helpers/render-with-router"
 import Navbar from "./index"
+import { renderTestApp } from "../../tests/helpers/render-test-app";
 
 describe('NAVBAR TEST', () => {
   test('main link navbar', async () => {
-    renderWithRouter('/', <Navbar />);
+    renderTestApp(<Navbar />, {});
 
     const mainLink = screen.getByTestId('main-link');
     await userEvent.click(mainLink);
@@ -15,7 +16,7 @@ describe('NAVBAR TEST', () => {
   });
 
   test('about link navbar', async () => {
-    renderWithRouter('/', <Navbar />);
+    renderTestApp(<Navbar />, {});
 
     const aboutLink = screen.getByTestId('about-link');
     await userEvent.click(aboutLink);
@@ -23,7 +24,7 @@ describe('NAVBAR TEST', () => {
   });
 
   test('uaers link navbar', async () => {
-    renderWithRouter('/', <Navbar />);
+    renderTestApp(<Navbar />, {});
 
     const usersLink = screen.getByTestId('users-link');
     await userEvent.click(usersLink);

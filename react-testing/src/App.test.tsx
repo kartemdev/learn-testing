@@ -2,14 +2,13 @@ import { MemoryRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from './App';
+import { renderTestApp } from './tests/helpers/render-test-app';
+import { renderWithRedux } from './tests/helpers/render-with-redux';
+import Navbar from './components/navbar';
 
 describe('TEST APP', () => {
   test('Router test', async () => {
-    render(
-      <MemoryRouter>
-        <App />
-      </MemoryRouter>
-    );
+    renderTestApp(<Navbar />, {});
 
     const mainLink = screen.getByTestId('main-link');
     const aboutLink = screen.getByTestId('about-link');
@@ -20,11 +19,7 @@ describe('TEST APP', () => {
   });
 
   test('Error page test', async () => {
-    render(
-      <MemoryRouter initialEntries={['/non-existing-path']}>
-        <App />
-      </MemoryRouter>
-    );
+    renderTestApp(null, { route: '/non-existing-path' });
 
     expect(screen.getByTestId('not-found-page')).toBeInTheDocument();
   });

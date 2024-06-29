@@ -3,7 +3,7 @@ import { render } from "@testing-library/react";
 
 import AppRouter from "../../app-router"
 
-const renderWithRouter = (initialRoute = '/', component: React.ReactNode = null) => {
+const renderWithRouter = (component: React.ReactNode = null, initialRoute = '/',) => {
   return render(
     <MemoryRouter initialEntries={[initialRoute]}>
       <AppRouter />

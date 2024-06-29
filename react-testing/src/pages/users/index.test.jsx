@@ -31,24 +31,21 @@ describe('USERS TEST', () => {
     }
   });
 
-  beforeEach(() => {
-    axios.get.mockReturnValue(response);
-  })
-
   afterEach(() => {
     jest.clearAllMocks();
   });
 
   test('Get users', async () => {
-    render(<Users />);
+    axios.get.mockReturnValue(response);
+    renderWithRouter(null, '/users');
     const users = await screen.findAllByTestId('user-item');
     expect(users.length).toBe(4)
     expect(axios.get).toBeCalledTimes(1);
-    screen.debug()
   });
 
   test('Redirect to details user', async () => {
-    renderWithRouter('/users');
+    axios.get.mockReturnValue(response);
+    renderWithRouter(null, '/users');
     const users = await screen.findAllByTestId('user-item');
     expect(users.length).toBe(4)
     await userEvent.click(users[0])
